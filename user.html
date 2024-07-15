@@ -2,398 +2,285 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon Fiscalité Intelligent</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMzK4z2ViO8l9G5mIv5sQ3pZjIRX/Cz7sbxma5G" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMzK4z2ViO8l9G5mIv5sQ3pZjIRX/Cz7sbxma5G" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
         }
 
-        header img {
-            height: 50px;
-        }
-
-        .faq .card {
-            margin-bottom: 1rem;
-        }
-
-        .history-container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
+        .header {
             background-color: #fff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
             margin-bottom: 20px;
         }
 
-        .history-header h2 {
-            margin: 0;
-            color: #333;
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+            padding: 0 20px 20px;
         }
 
-        .history-header .clear-history {
+        .bento-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .search-history {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .faq {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .tutorials {
+            grid-column: span 2;
+        }
+
+        .useful-links {
+            grid-column: span 2;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin-bottom: 10px;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+            padding: 5px;
+            background-color: transparent;
+        }
+
+        .search-bar i {
+            color: #888;
+        }
+
+        .clear-history {
             background-color: #ff4757;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .history-header .clear-history:hover {
+        .clear-history:hover {
             background-color: #e84118;
         }
 
         .history-list {
             list-style: none;
             padding: 0;
-            margin: 0;
         }
 
         .history-list li {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
+            padding: 10px 0;
             border-bottom: 1px solid #eaeaea;
-            transition: background-color 0.3s ease;
         }
 
-        .history-list li:hover {
-            background-color: #f1f1f1;
+        .faq-item,
+        .tutorial-item,
+        .link-item {
+            margin-bottom: 10px;
         }
 
-        .history-list .search-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .history-list .search-info i {
-            margin-right: 10px;
-            color: #007bff;
-        }
-
-        .history-list .search-info .search-term {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .history-list .search-info .search-date {
-            margin-left: 10px;
-            font-size: 14px;
-            color: #888;
-        }
-
-        .history-list .actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .history-list .actions button {
-            background: none;
+        .see-more {
+            background-color: #212741;
+            color: #fff;
             border: none;
+            padding: 10px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-left: 10px;
-            color: #888;
-            transition: color 0.3s ease;
-        }
-
-        .history-list .actions button:hover {
-            color: #333;
-        }
-
-        .card-body {
-            margin-left: 10px;
-        }
-    </style>
-    <style>
-        .group {
-            display: flex;
-            line-height: 28px;
-            align-items: center;
-            position: relative;
-            max-width: 300px;
-
-        }
-
-        .input {
             width: 100%;
-            height: 35px;
-            line-height: 28px;
-            padding: 0 1rem;
-            padding-left: 2.5rem;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            outline: none;
-            background-color: #ffff;
-            color: #0d0c22;
-            transition: .3s ease;
-            border-color: #e84118;
         }
 
-        .input::placeholder {
-            color: #9e9ea7;
-        }
-
-        .input:focus,
-        input:hover {
-            outline: none;
-            border-color: rgba(234, 76, 137, 0.4);
+        .header {
             background-color: #fff;
-            box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            margin-bottom: 20px;
         }
 
-        .icon {
-            position: absolute;
-            left: 1rem;
-            fill: #9e9ea7;
-            width: 1rem;
-            height: 1rem;
+        .header .d-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-bar-container {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 5px 15px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            padding: 5px;
+            width: 100%;
+        }
+
+        .search-bar i {
+            color: #888;
+            margin-right: 10px;
         }
     </style>
-
 </head>
 
 <body>
-    <header class="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
-        <div class="d-flex align-items-center">
-            <img src="assets/images/logo.png" alt="MFI Logo" class="mr-3" style="height: 50px;">
-        </div>
-        <div class="d-flex align-items-center">
-            <div class="group">
-                <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                    <g>
-                        <path
-                            d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                        </path>
-                    </g>
-                </svg>
-                <input placeholder="Search" type="search" class="input">
+    <header class="header">
+        <div class="d-flex justify-content-between align-items-center">
+            <img src="assets/images/logo.png" alt="MFI Logo" style="height: 50px" />
+            <div class="search-bar-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="search" placeholder="Rechercher" />
+                </div>
             </div>
+            <button class="btn btn-danger">Déconnexion</button>
         </div>
-
-        <button class="btn btn-danger">LogOut</button>
     </header>
-    <div class="container-fluid mt-4">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="history-container">
-                    <div class="history-header">
-                        <h2>Historique de Recherche</h2>
-                        <button class="clear-history" style="height: 40px;width: 300px;">Effacer l'historique</button>
-                    </div>
-                    <ul class="history-list">
-                        <li>
-                            <div class="search-info">
-                                <i class="fas fa-search"></i>
-                                <span class="search-term">Optimisation fiscale</span>
-                                <span class="search-date">12 juillet 2024, 14:32</span>
-                            </div>
-                            <div class="actions">
-                                <button><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="search-info">
-                                <i class="fas fa-search"></i>
-                                <span class="search-term">Déductions fiscales 2024</span>
-                                <span class="search-date">10 juillet 2024, 10:18</span>
-                            </div>
-                            <div class="actions">
-                                <button><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="search-info">
-                                <i class="fas fa-search"></i>
-                                <span class="search-term">Optimisation fiscale</span>
-                                <span class="search-date">02 juillet 2024, 19:30</span>
-                            </div>
-                            <div class="actions">
-                                <button><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="search-info">
-                                <i class="fas fa-search"></i>
-                                <span class="search-term">Déductions fiscales 2024</span>
-                                <span class="search-date">01 juillet 2024, 01:48</span>
-                            </div>
-                            <div class="actions">
-                                <button><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="search-info">
-                                <i class="fas fa-search"></i>
-                                <span class="search-term">Déductions fiscales 2024</span>
-                                <span class="search-date">01 juillet 2024, 01:48</span>
-                            </div>
-                            <div class="actions">
-                                <button><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="search-info">
-                                <i class="fas fa-search"></i>
-                                <span class="search-term">Déductions fiscales 2024</span>
-                                <span class="search-date">01 juillet 2024, 01:48</span>
-                            </div>
-                            <div class="actions">
-                                <button><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        </li>
-                        <!-- More search history items -->
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <section class="faq mb-4" style="background-color: #eaeaea;">
 
-                    <div class="row">
-                        <div class="col-8">
-                            <h2 style="margin-left: 20px;"> FAQ</h2>
-                        </div>
-                        <div class="col-4">
-                            <div class="group" style="margin-top: 10px;margin-bottom: 5px;">
-                                <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                                    <g>
-                                        <path
-                                            d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                                        </path>
-                                    </g>
-                                </svg>
-                                <input placeholder="Search" type="search" class="input">
-                            </div>
-                        </div>
-                    </div>
+    <div class="bento-grid">
+        <section class="bento-item search-history">
+            <h2>Historique de Recherche</h2>
+            <button class="clear-history">Effacer l'historique</button>
+            <ul class="history-list">
+                <li>
+                    <span><i class="fas fa-search"></i> Optimisation fiscale</span>
+                    <span>12 juillet 2024, 14:32</span>
+                </li>
+                <li>
+                    <span><i class="fas fa-search"></i> Déductions fiscales 2024</span>
+                    <span>10 juillet 2024, 10:18</span>
+                </li>
+                <li>
+                    <span><i class="fas fa-search"></i> Déductions fiscales 2024</span>
+                    <span>10 juillet 2024, 10:18</span>
+                </li>
+                <li>
+                    <span><i class="fas fa-search"></i> Déductions fiscales 2024</span>
+                    <span>10 juillet 2024, 10:18</span>
+                </li>
+                <!-- Add more history items here -->
+            </ul>
+        </section>
 
-                    <div class="card mb-3">
-                        <div class="row no-gutters">
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">"Déclarations erronées", "redressements", "comptes en
-                                        désordre"... les défis fiscaux avant la saison des impôts.</h5>
-                                    <p class="card-text">La fiscalité suscite des préoccupations. Les erreurs de
-                                        déclaration et les nouvelles régulations fiscales sont au centre des
-                                        discussions...</p>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">"Déclarations erronées", "redressements", "comptes en
-                                        désordre"... les défis fiscaux avant la saison des impôts.</h5>
-                                    <p class="card-text">La fiscalité suscite des préoccupations. Les erreurs de
-                                        déclaration et les nouvelles régulations fiscales sont au centre des
-                                        discussions...</p>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">"Déclarations erronées", "redressements", "comptes en
-                                        désordre"... les défis fiscaux avant la saison des impôts.</h5>
-                                    <p class="card-text">La fiscalité suscite des préoccupations. Les erreurs de
-                                        déclaration et les nouvelles régulations fiscales sont au centre des
-                                        discussions... </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Répétez les éléments de la FAQ ici -->
-                    <button class="btn  btn-block" style="background-color:#212741;color: #fff;">Voir
-                        Plus</button>
-                </section>
+        <section class="bento-item faq">
+            <h2>Questions Fréquemment Posées</h2>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="search" placeholder="Rechercher dans la FAQ" />
             </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-1"><img src="assets/images/tutorials.png" alt="" style="width: 25px;">
-                        </div>
-                        <div class="col-6">
-                            <h5 class="mb-0">Tutoriels</h5>
-                        </div>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Comment déclarer vos impôts en ligne <i
-                            class="fas fa-info-circle float-right"></i></li>
-                    <li class="list-group-item">Optimisation fiscale pour les petites entreprises <i
-                            class="fas fa-info-circle float-right"></i></li>
-                    <li class="list-group-item">Comprendre les crédits d'impôt disponibles <i
-                            class="fas fa-info-circle float-right"></i></li>
-                </ul>
+            <div class="faq-item">
+                <h5>
+                    "Déclarations erronées", "redressements", "comptes en désordre"...
+                    les défis fiscaux avant la saison des impôts.
+                </h5>
+                <p>
+                    La fiscalité suscite des préoccupations. Les erreurs de déclaration
+                    et les nouvelles régulations fiscales sont au centre des
+                    discussions...
+                </p>
             </div>
-            <div class="col-6">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-1"><img src="assets/images/lien.png" alt="" style="width: 25px;">
-                        </div>
-                        <div class="col-6">
-                            <h5 class="mb-0">Liens Utiles</h5>
-                        </div>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fas fa-link"></i> <a href="https://www.example.com">Lien
-                            utile 1</a></li>
-                    <li class="list-group-item"><i class="fas fa-link"></i> <a href="https://www.example.com">Lien
-                            utile 2</a></li>
-                    <li class="list-group-item"><i class="fas fa-link"></i> <a href="https://www.example.com">Lien
-                            utile 3</a></li>
-                </ul>
+            <div class="faq-item">
+                <h5>
+                    "Déclarations erronées", "redressements", "comptes en désordre"...
+                    les défis fiscaux avant la saison des impôts.
+                </h5>
+                <p>
+                    La fiscalité suscite des préoccupations. Les erreurs de déclaration
+                    et les nouvelles régulations fiscales sont au centre des
+                    discussions...
+                </p>
             </div>
-        </div>
+            <!-- Add more FAQ items here -->
+            <button class="see-more">Voir Plus</button>
+        </section>
+
+        <section class="bento-item tutorials">
+            <h2>
+                <img src="assets/images/tutorials.png" alt="" style="width: 25px" />
+                Tutoriels
+            </h2>
+            <div class="tutorial-item">
+                <p>
+                    Comment rechercher sur MFI
+                    <i class="fas fa-info-circle float-right"></i>
+                </p>
+            </div>
+            <div class="tutorial-item">
+                <p>
+                    Optimiser votre recherche pour un resultat pertinant
+                    <i class="fas fa-info-circle float-right"></i>
+                </p>
+            </div>
+            <div class="tutorial-item">
+                <p>
+                    Comment utiliser votre espace administrative
+                    <i class="fas fa-info-circle float-right"></i>
+                </p>
+            </div>
+        </section>
+
+        <section class="bento-item useful-links">
+            <h2>
+                <img src="assets/images/lien.png" alt="" style="width: 25px" /> Liens
+                Utiles
+            </h2>
+            <div class="link-item">
+                <i class="fas fa-link"></i>
+                <a
+                    href="https://jurisprudence.service.canada.ca/search/index.html">https://jurisprudence.service.canada.ca/search/index.html</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-link"></i>
+                <a href="https://www.canlii.org/en/">https://www.canlii.org/en/</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-link"></i>
+                <a href="https://laws-lois.justice.gc.ca/fra/">https://laws-lois.justice.gc.ca/fra/</a>
+            </div>
+        </section>
     </div>
-    <br><br>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"
-        integrity="sha384-4IqpK1K1iB2Be7iMW/7y7umYJ58fd2E7GWq3Dz2eqB64a7QXX9keFJ2gB8bY2qOl"
-        crossorigin="anonymous"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const clearHistoryBtn = document.querySelector('.clear-history-btn');
-            const historyList = document.getElementById('history-list');
-
-            // Exemple de données d'historique
-            const historyItems = [
-                { title: 'Optimisation fiscale', date: '12 juillet 2024, 14:32' },
-                { title: 'Déductions fiscales 2024', date: '10 juillet 2024, 10:18' },
-                // Ajoutez d'autres éléments ici
-            ];
-
-            // Ajouter les éléments à la liste
-            historyItems.forEach(item => {
-                const li = document.createElement('li');
-                li.className = 'list-group-item';
-                li.innerHTML = `<i class="fas fa-search mr-2"></i> ${item.title} <span class="float-right">${item.date}</span>`;
-                historyList.appendChild(li);
-            });
-
-            clearHistoryBtn.addEventListener('click', () => {
-                historyList.innerHTML = '';
-            });
-        });
-
-    </script>
 </body>
 
 </html>
